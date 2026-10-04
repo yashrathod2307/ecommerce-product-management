@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-Commerce Product Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head><body>
+
+    <h1>E-Commerce Product Management System</h1>
+
+    <a href="/add">
+        <button>Add New Product</button>
+    </a>
+
+    <h2>Products</h2>
+
+    {% if products %}
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Action</th>
+            </tr>
+
+            {% for product in products %}
+            <tr>
+                <td>{{ product["id"] }}</td>
+                <td>{{ product["name"] }}</td>
+                <td>{{ product["category"] }}</td>
+                <td>₹{{ product["price"] }}</td>
+                <td>{{ product["stock"] }}</td>
+               <td>
+    <a href="/edit/{{ product['id'] }}">
+        <button>Edit</button>
+    </a>
+
+    <a href="/delete/{{ product['id'] }}"
+       onclick="return confirm('Are you sure you want to delete this product?');">
+        <button>Delete</button>
+    </a>
+</td>
+
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No products available.</p>
+    {% endif %}
+
+</body>
+</html>
+   
